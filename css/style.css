@@ -1,0 +1,423 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Use Google Font */
+    line-height: 1.6;
+    color: #333; /* Darker text for better contrast */
+    background-color: #ffffff; /* White background for content area */
+    position: relative; /* Needed for absolute positioning of the canvas */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Hero Section Styles */
+#hero {
+    height: 70vh; /* Reduced viewport height */
+    min-height: 450px; /* Minimum height */
+    position: relative;
+    display: flex;
+    /* flex-direction: column; // Removed */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden; /* Contain the canvas */
+    background-color: #1a1a1a; /* Dark background for hero */
+    color: #fff; /* White text for hero */
+}
+
+/* Donut Styles - Centered */
+#donut-output {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for element size */
+    /* Estimate size based on 120x45 grid, 12px font, 0.8 line-height */
+    /* Adjust these values if the donut looks cut off or has too much space */
+    width: calc(120ch + 10px); /* Width based on character count + padding */
+    height: calc(45 * 12px * 0.8 + 10px); /* Height based on lines * font-size * line-height + padding */
+    max-width: 95vw; /* Prevent overflow on very narrow screens */
+    max-height: 95vh; /* Prevent overflow vertically */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    line-height: 0.8;
+    color: #0a0; /* Slightly darker green */
+    /* background-color: transparent; */ /* Remove background */
+    overflow: hidden;
+    text-align: center;
+    white-space: pre;
+    z-index: 0; /* Behind hero content */
+    /* Optional: Add a subtle blur or fade effect */
+    /* filter: blur(1px); */
+    /* opacity: 0.8; */
+    padding: 5px; /* Add some padding */
+    box-sizing: content-box; /* Ensure padding doesn't add to width/height calculation */
+}
+
+
+#hero-content {
+    position: relative; /* To position above the absolute donut */
+    z-index: 1; /* Ensure content is above donut */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the text/photo block */
+    width: 100%; /* Take full width */
+    height: 100%; /* Take full height */
+    padding: 2rem; /* Add padding */
+    /* background: rgba(0, 0, 0, 0.4); */ /* Optional overlay for readability */
+}
+
+#hero-text-photo {
+    /* flex: 1; // Removed */
+    text-align: center; /* Center text */
+    /* padding-right: 0; // Removed */
+    background: rgba(0, 0, 0, 0.65); /* Semi-transparent background for readability */
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px; /* Limit width of the text block */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Remove styles for the now-deleted animation column */
+/* #hero-animation { ... } */
+/* #hero-extra-content { ... } */
+
+
+/* Style header within hero */
+#hero header {
+    /* position: relative; // Not needed */
+    /* z-index: 1; // Not needed */
+    padding: 0; /* Remove padding */
+    background: none; /* Remove background */
+    border-radius: 0; /* Remove border-radius */
+    margin-bottom: 1.5rem; /* Space below header */
+}
+
+#hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+#hero h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    color: #ccc;
+}
+
+#profile-photo-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Circular */
+    background-color: #444; /* Placeholder color */
+    border: 3px solid #666;
+    display: flex; /* To center text/icon inside */
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 0.8rem;
+    /* Add your background-image here later */
+    /* background-image: url('path/to/your/photo.jpg'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+}
+
+
+/* Remove scroll down button styles */
+/* .scroll-down-btn { ... } */
+
+
+nav {
+    background: #ffffff; /* White background for nav */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add shadow */
+    padding: 1rem; /* More padding */
+    position: sticky; /* Make nav sticky */
+    top: 0;
+    z-index: 1000; /* Ensure nav is above everything when scrolling */
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: #333; /* Dark text for nav links */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Smooth transition on hover */
+}
+
+nav ul li a:hover {
+    color: #007bff; /* Standard blue highlight */
+}
+
+main {
+    max-width: 1100px; /* Wider content area */
+    margin: 0 auto; /* Remove top margin, handled by padding */
+    padding: 4rem 2rem; /* More vertical padding, standard horizontal */
+    /* background-color: transparent; Remove background */
+    /* border-radius: 0; Remove border-radius */
+    position: relative;
+    z-index: 1;
+    background-color: #f8f9fa; /* Light grey background for main content area */
+}
+
+section {
+    margin-bottom: 3rem; /* Increased spacing between sections */
+    padding: 0; /* Remove padding from section itself */
+    background: none; /* Remove background from section */
+    border-radius: 0;
+    box-shadow: none; /* Remove shadow from section */
+}
+
+section h3 {
+    text-align: center; /* Center section titles */
+    margin-bottom: 2.5rem; /* Increased spacing below title */
+    font-size: 2rem; /* Larger section titles */
+    color: #343a40; /* Dark grey title color */
+    border-bottom: 3px solid #007bff; /* Blue accent border */
+    display: inline-block; /* Allow centering with text-align */
+    padding-bottom: 0.5rem;
+}
+
+/* Card Container Styles */
+.card-container {
+    display: grid; /* Use grid for layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 2rem; /* Space between cards */
+}
+
+/* Card Styles */
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee; /* Subtle border */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.card h4 {
+    margin-bottom: 0.75rem;
+    color: #007bff; /* Blue heading for cards */
+    font-size: 1.2rem;
+}
+
+section article p em {
+    color: #6c757d; /* Grey for date/emphasis */
+    font-size: 0.9em;
+    margin-bottom: 1rem; /* Add space below emphasis */
+}
+
+.card ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+    padding-left: 0.5rem; /* Adjust padding */
+    color: #555; /* Slightly darker list item text */
+}
+
+.card ul li {
+    margin-bottom: 0.5rem; /* Space between list items */
+}
+
+/* Project Link Style */
+.project-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.project-link:hover {
+    background-color: #0056b3;
+    color: #fff;
+    text-decoration: none;
+}
+
+
+#contact {
+    text-align: center; /* Center contact info */
+}
+
+#contact ul {
+    list-style: none;
+    padding-left: 0; /* Remove default padding */
+    margin-top: 1rem;
+    display: inline-block; /* Allow centering */
+    text-align: left; /* Align list items left */
+}
+
+#contact ul li {
+    margin-bottom: 0.5rem;
+}
+
+#contact ul li a {
+    text-decoration: none;
+    color: #3498db; /* Use accent color */
+    transition: color 0.3s ease;
+}
+
+#contact ul li a:hover {
+    text-decoration: underline;
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem; /* More space above footer */
+    padding: 1.5rem;
+    background: #343a40; /* Dark grey footer */
+    color: #f8f9fa; /* Light text color for footer */
+    position: relative; /* Ensure footer is above the canvas */
+    z-index: 1;
+}
+
+/* Basic Responsive */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 0.5rem 0;
+    }
+
+    main {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+    .card-container {
+        grid-template-columns: 1fr; /* Stack cards on smaller screens */
+    }
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+    #hero h2 {
+        font-size: 1.2rem;
+    }
+    #hero-content {
+        /* flex-direction: column; // Not needed */
+        padding: 1rem;
+    }
+    #hero-text-photo {
+        /* padding-right: 0; // Removed */
+        /* order: 2; // Removed */
+        /* display: flex; // Already flex */
+        /* flex-direction: column; // Already column */
+        /* align-items: center; // Already center */
+        padding: 1.5rem; /* Adjust padding */
+        max-width: 90%; /* Allow wider text block */
+    }
+    /* Remove styles for the now-deleted animation column */
+    /* #hero-animation { ... } */
+    #profile-photo-placeholder {
+        width: 120px; /* Smaller photo on mobile */
+        height: 120px;
+    }
+    #donut-output {
+        font-size: 10px; /* Adjust font size for mobile */
+        line-height: 0.9; /* Adjust line height for mobile */
+        /* Recalculate size for mobile font settings */
+        width: calc(120ch + 10px);
+        height: calc(45 * 10px * 0.9 + 10px);
+    }
+    main {
+        padding: 3rem 1rem; /* Adjust padding for mobile */
+    }
+}
+
+/* Styles for scroll fade-in animation (Applied to elements now) */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px); /* Start slightly lower */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.contact-card {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.contact-card i {
+    font-size: 1.25rem;
+    color: #007bff;
+}
+
+.contact-card a {
+    color: #007bff;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.contact-card a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .contact-card {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+#profile-photo-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+#profile-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: fill;
+    border-radius: 50%;
+    border: 3px solid #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
